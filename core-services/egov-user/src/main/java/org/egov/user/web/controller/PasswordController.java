@@ -8,6 +8,7 @@ import org.egov.user.web.contract.LoggedInUserUpdatePasswordRequest;
 import org.egov.user.web.contract.NonLoggedInUserUpdatePasswordRequest;
 import org.egov.user.web.contract.UpdatePasswordResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class PasswordController {
      * @param request
      * @return
      */
+    @CrossOrigin("*")
     @PostMapping("/_update")
     public UpdatePasswordResponse updatePassword(@RequestBody @Valid LoggedInUserUpdatePasswordRequest request) {
         userService.updatePasswordForLoggedInUser(request.toDomain());
@@ -44,6 +46,7 @@ public class PasswordController {
      * @param request
      * @return
      */
+    @CrossOrigin("*")
     @PostMapping("/nologin/_update")
     public UpdatePasswordResponse updatePasswordForNonLoggedInUser(@RequestBody @Valid NonLoggedInUserUpdatePasswordRequest request) {
         userService.updatePasswordForNonLoggedInUser(request.toDomain(), request.getRequestInfo());

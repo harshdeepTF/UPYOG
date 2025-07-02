@@ -39,7 +39,7 @@ public class OtpRepository {
     public boolean isOtpValidationComplete(OtpValidationRequest request) {
         Otp otp = Otp.builder().tenantId(request.getTenantId()).uuid(request.getOtpReference()).build();
         OtpRequest otpRequest = new OtpRequest(otp);
-        OtpResponse otpResponse = restTemplate.postForObject(otpSearchEndpoint, otpRequest, OtpResponse.class);
+        OtpResponse otpResponse = restTemplate.postForObject("http://localhost:8087/otp/v1/_search", otpRequest, OtpResponse.class);
         return otpResponse.isValidationComplete(request.getMobileNumber());
     }
 
@@ -52,7 +52,7 @@ public class OtpRepository {
      */
     public boolean validateOtp(OtpValidateRequest request) {
         try {
-            OtpResponse otpResponse = restTemplate.postForObject(otpValidateEndpoint, request, OtpResponse.class);
+            OtpResponse otpResponse = restTemplate.postForObject("http://localhost:8087/otp/v1/_validate", request, OtpResponse.class);
             if (null != otpResponse && null != otpResponse.getOtp())
                 return otpResponse.getOtp().isValidationSuccessful();
             else

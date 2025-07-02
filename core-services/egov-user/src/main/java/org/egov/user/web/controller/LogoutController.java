@@ -28,6 +28,7 @@ public class LogoutController {
      * @return
      * @throws Exception
      */
+    @CrossOrigin("*")
     @PostMapping("/_logout")
     public ResponseInfo deleteToken(@RequestBody TokenWrapper tokenWrapper) throws Exception {
         String accessToken = tokenWrapper.getAccessToken();
