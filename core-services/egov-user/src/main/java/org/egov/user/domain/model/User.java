@@ -106,6 +106,7 @@ public class User {
     public void validateNewUser() {
         validateNewUser(true);
     }
+    
 
     public void validateNewUser(boolean createUserValidateName) {
         if (isUsernameAbsent()
